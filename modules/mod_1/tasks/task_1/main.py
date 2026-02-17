@@ -117,14 +117,9 @@ print("\n\nЗадача 4: «Учетная запись пользовател�
 """
 Задача 4: «Учетная запись пользователя с хешированным паролем»
 """
-
-user = {
-    "username": "uname",
-
-}
+ph = PasswordHasher(time_cost=2, memory_cost=65536, parallelism=4, hash_len=32)
 
 def create_user(username: str, password: str) -> dict:
-    ph = PasswordHasher()
     return {
         "username": username,
         "password_hash": ph.hash(password),
@@ -134,7 +129,6 @@ def create_user(username: str, password: str) -> dict:
 
 def authenticate_user(user: dict, password: str) -> str:
     MAX_ATTEMPS = 3
-    ph = PasswordHasher()
     if user["is_locked"]:
         return "Account locked"
     try:
