@@ -1,3 +1,6 @@
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
+
 print("\n\nЗадача 1: «Валидатор пароля»")
 """
 Задача 1: «Валидатор пароля»
@@ -108,5 +111,59 @@ logs = [
 ]
 
 print(find_suspicious_activity(logs))
+
+
+print("\n\nЗадача 4: «Учетная запись пользователя с хешированным паролем»")
+"""
+Задача 4: «Учетная запись пользователя с хешированным паролем»
+"""
+
+user = {
+    "username": "uname",
+
+}
+
+def create_user(username: str, password: str) -> dict:
+    ph = PasswordHasher()
+    return {
+        "username": username,
+        "password_hash": ph.hash(password),
+        "failed_login_attempts": 0,
+        "is_locked": False
+    }
+
+def authenticate_user(user: dict, password: str) -> str:
+    MAX_ATTEMPS = 3
+    ph = PasswordHasher()
+    if user["is_locked"]:
+        return "Account locked"
+    try:
+        ph.verify(user["password_hash"], password)
+        user["failed_login_attempts"] = 0
+        return "Login successful" 
+    except VerifyMismatchError:
+        user["failed_login_attempts"] += 1
+        if (user["failed_login_attempts"] == MAX_ATTEMPS):
+            user["is_locked"] = True
+        return "Login error"
+
+user = create_user("admin", "admin")
+print(user)
+
+print(authenticate_user(user, "admin"))
+print(user)
+
+print(authenticate_user(user, "admin1"))
+print(user)
+
+print(authenticate_user(user, "admin2"))
+print(user)
+
+print(authenticate_user(user, "admin3"))
+print(user)
+
+print(authenticate_user(user, "admin"))
+print(user)
+
         
 
