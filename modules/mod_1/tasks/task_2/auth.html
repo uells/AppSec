@@ -1,22 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
-    <title>Форма регистрации</title>
-    
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <div class="container">
-        <form action="" method="post" class="form">
-            <label for="login">Логин</label>
-            <input type="text" id="login" name="login" placeholder="Логин">
-            <label for="pass">Пароль</label>
-            <input type="password" name="pass" id="pass">
-            <button type="submit">Войти</button>
-        </form>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';" />
+        <title>Форма регистрации</title>
+
+        <link rel="stylesheet" href="assets/css/style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="hello-block">
+                <h1 class="hello-block_title">
+                    Добро пожаловать!
+                </h1>
+            </div>
+            <form action="" method="post" class="form">
+                <!-- Далее сервер установит здесь CSRF-токен -->
+                <input type="hidden" name="csrf_token" value="" />
+                <div class="form_item">
+                    <label class="form_label" for="login">Логин</label>
+                    <input class="form_input" type="text" id="login" name="login" placeholder="Логин" />
+                </div>
+
+                <div class="form_item">
+                    <label class="form_label" for="pass">Пароль</label>
+                    <input class="form_input" type="password" name="pass" id="pass" placeholder="Пароль" />
+                </div>
+
+                <button class="form_submit" type="submit">Войти</button>
+            </form>
+        </div>
+    </body>
 </html>
