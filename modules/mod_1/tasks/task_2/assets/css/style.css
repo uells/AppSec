@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "Tektur";
+  src: url("../fonts/Tektur/Tektur-VariableFont_wdth\,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+    --main-fs: 10px;
+    --white: #F9F9F9;
+    --black: #000100;
+    --fiol: #6D466B;
+}
+
+html {
+    font-family: Tektur;
+    font-size: var(--main-fs);
+    font-weight: 300;
+    background: var(--white);
+}
+
+.container {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.form {
+    margin-top: 10rem;
+    color: var(--white);
+    font-family: Tektur;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--fiol);
+    padding: 3rem;
+    border-radius: 1rem;
+}
+
+.form_label {
+    font-family: Tektur;
+    display: block;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.form_input {
+    font-family: Tektur;
+    font-size: 1.7rem;
+    width: stretch;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    color: var(--black);
+}
+
+.form_submit {
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--white);
+    font-family: Tektur;
+    width: fit-content;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-size: 1.7rem;
+    background-color: var(--black);
+    transition: all .2s;
+}
+
+.form_submit:hover {
+    color: var(--black);
+    background-color: var(--white);
+}
