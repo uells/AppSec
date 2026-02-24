@@ -20,15 +20,15 @@
                 <input type="hidden" name="csrf_token" value="" />
                 <div class="form_item">
                     <label class="form_label" for="login">Логин</label>
-                    <input class="form_input" type="text" id="login" name="login" placeholder="Логин" />
+                    <input minlength="3" class="form_input" type="text" id="login" name="login" placeholder="Логин"  required/>
                 </div>
 
                 <div class="form_item">
                     <label class="form_label" for="pass">Пароль</label>
-                    <input class="form_input" type="password" name="pass" id="pass" placeholder="Пароль" />
+                    <input class="form_input" type="password" name="pass" id="pass" placeholder="Пароль" required/>
                 </div>
 
-                <button class="form_submit" type="submit">Войти</button>
+                <button class="btn form_submit" type="submit">Войти</button>
             </form>
         </div>
     </body>
