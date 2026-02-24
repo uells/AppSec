@@ -11,21 +11,31 @@
     <body>
         <div class="container">
             <div class="hello-block">
-                <h1 class="hello-block_title">
-                    Добро пожаловать!
-                </h1>
+                <h1 class="hello-block_title">Добро пожаловать!</h1>
             </div>
             <form action="" method="post" class="form">
                 <!-- Далее сервер установит здесь CSRF-токен -->
                 <input type="hidden" name="csrf_token" value="" />
                 <div class="form_item">
                     <label class="form_label" for="login">Логин</label>
-                    <input minlength="3" class="form_input" type="text" id="login" name="login" placeholder="Логин"  required/>
+                    <input
+                        minlength="3"
+                        pattern="[A-Za-z0-9_.-]{3,30}"
+                        maxlength="30"
+                        title="3–30 символов (латиница, цифры, _ . -)"
+                        class="form_input"
+                        type="text"
+                        id="login"
+                        name="login"
+                        placeholder="Логин"
+                        required
+                        utocomplete="username"
+                    />
                 </div>
 
                 <div class="form_item">
                     <label class="form_label" for="pass">Пароль</label>
-                    <input class="form_input" type="password" name="pass" id="pass" placeholder="Пароль" required/>
+                    <input class="form_input" type="password" name="pass" id="pass" minlength="12" placeholder="Пароль" required autocomplete="current-password" />
                 </div>
 
                 <button class="btn form_submit" type="submit">Войти</button>
