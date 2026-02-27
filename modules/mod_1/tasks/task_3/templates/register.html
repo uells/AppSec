@@ -1,0 +1,36 @@
+{% extends "base.html" %} 
+{% block title %} Форма регистрации {% endblock% } 
+{% block pageTitle %} Регистрация пользователя {% endblock% } 
+
+{% block content %}
+<form action="/register" id="regForm" method="post" class="form" autocomplete="off">
+    <!-- Далее сервер установит здесь CSRF-токен -->
+    <input type="hidden" name="csrf_token" value="" />
+    <div class="form_item">
+        <label class="form_label" for="login">Логин</label>
+        <input
+            minlength="3"
+            pattern="^[A-Za-z0-9_.\-]{3,30}$"
+            maxlength="30"
+            title="3–30 символов (латиница, цифры, _ . -)"
+            class="form_input"
+            type="text"
+            id="login"
+            name="login"
+            placeholder="Логин"
+            required
+        />
+    </div>
+    <div class="form_item">
+        <label class="form_label" for="email">Email</label>
+        <input class="form_input" id="email" placeholder="Email" name="email" type="email" required maxlength="254" />
+    </div>
+
+    <div class="form_item">
+        <label class="form_label" for="password">Пароль</label>
+        <input class="form_input" type="password" name="password" id="password" minlength="12" placeholder="Пароль" required autocomplete="new-password" />
+    </div>
+
+    <button class="btn form_submit" type="submit">Зарегистрироваться</button>
+</form>
+{% endblock% }
