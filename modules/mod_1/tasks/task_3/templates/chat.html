@@ -1,6 +1,6 @@
 {% extends "base.html" %} 
-{% block title %} Чат {% endblock% } 
-{% block pageTitle %} Добро пожаловать! {% endblock% } 
+{% block title %} Чат {% endblock %} 
+{% block pageTitle %} Добро пожаловать! {% endblock %} 
 
 {% block content %}
 <div class="chat-box">
@@ -14,7 +14,7 @@
             <div class="message_time">17:00</div>
         </div>
     </div>
-    <form action="" method="post" class="form-chat">
+    <form action="/send" method="post" class="form-chat">
         <!-- Далее сервер установит здесь CSRF-токен -->
         <input type="hidden" name="csrf_token" value="" />
         
@@ -22,7 +22,11 @@
             <textarea maxlength="256"  name="message" id="message" placeholder="Введите сообщение.." rows="3"></textarea>
         </div>
 
-        <button class="btn form-chat_submit" type="submit">Отправить</button>
+        <div class="btns-row">
+            <a class="btn" href="/logout"> Выйти</a>
+            <button class="btn form-chat_submit" type="submit">Отправить</button>
+        </div>
+
     </form>
 </div>
-{% endblock% }
+{% endblock %}
