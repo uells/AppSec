@@ -13,13 +13,15 @@
             <div class="hello-block">
                 <h1 class="hello-block_title">{% block pageTitle %}{% endblock %}</h1>
             </div>
-            {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
-            <ul class="flashes">
-                {% for category, msg in messages %}
-                <li class="{{ category }}">{{ msg }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %} {% endwith %} {% block content %}{% endblock %}
+            <div class="content-wrapper">
+                {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+                <ul class="flashes">
+                    {% for category, msg in messages %}
+                    <li class="{{ category }}">{{ msg }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %} {% endwith %} {% block content %}{% endblock %}
+            </div>
         </div>
     </body>
 </html>
