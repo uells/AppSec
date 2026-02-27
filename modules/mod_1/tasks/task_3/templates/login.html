@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% block title %} Авторизация {% endblock% } 
+{% block pageTitle %} Авторизация пользователя {% endblock% } 
+
+{% block content %}
+<form action="/login" method="post" class="form">
+    <!-- Далее сервер установит здесь CSRF-токен -->
+    <input type="hidden" name="csrf_token" value="" />
+    <div class="form_item">
+        <label class="form_label" for="login">Логин</label>
+        <input
+            minlength="3"
+            pattern="^[A-Za-z0-9_.\-]{3,30}$"
+            maxlength="30"
+            title="3–30 символов (латиница, цифры, _ . -)"
+            class="form_input"
+            type="text"
+            id="login"
+            name="login"
+            placeholder="Логин"
+            required
+            utocomplete="username"
+        />
+    </div>
+
+    <div class="form_item">
+        <label class="form_label" for="password">Пароль</label>
+        <input class="form_input" type="password" name="password" id="password" minlength="12" placeholder="Пароль" required autocomplete="current-password" />
+    </div>
+
+    <button class="btn form_submit" type="submit">Войти</button>
+</form>
+{% endblock% }
