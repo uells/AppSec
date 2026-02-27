@@ -1,12 +1,18 @@
 <!doctype html>
 <html lang="ru">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';" />
         <title>{% block title %}AppSec Stand{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
     <body>
         <div class="container">
+            <div class="hello-block">
+                <h1 class="hello-block_title">{% block pageTitle %}{% endblock %}</h1>
+            </div>
             {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
             <ul class="flashes">
                 {% for category, msg in messages %}
@@ -14,28 +20,6 @@
                 {% endfor %}
             </ul>
             {% endif %} {% endwith %} {% block content %}{% endblock %}
-        </div>
-    </body>
-</html>
-
-<!doctype html>
-<html lang="ru">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';" />
-        <title>Форма регистрации</title>
-
-        <link rel="stylesheet" href="assets/css/style.css" />
-    </head>
-    <body>
-        <div class="container">
-            <div class="hello-block">
-                <h1 class="hello-block_title">Добро пожаловать!</h1>
-            </div>
-
-
-
         </div>
     </body>
 </html>
