@@ -55,7 +55,7 @@ body {
 }
 
 .form {
-  margin-top: 6rem;
+  margin-top: 1rem;
   color: var(--white);
   font-family: Tektur;
   font-size: 2rem;
@@ -169,6 +169,7 @@ body {
   flex-direction: column;
   gap: 3rem;
   max-width: 70rem;
+  width: 70rem;
   margin: auto;
 }
 
@@ -233,6 +234,53 @@ body {
   margin-left: auto;
   margin-top: 1rem;
 }
+
+.btns-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: end;
+}
+
+.btns-row .btn {
+  text-decoration: none;
+  margin-left: 0;
+}
+
+.content-wrapper {
+  margin-top: 6rem;
+  width: fit-content;
+  margin: auto;
+}
+
+.flashes {
+  list-style: none;
+  width: fit-content;
+  padding: 0;
+}
+
+.flashes li {
+  font-size: 1.5rem;
+}
+
+.form-ps-text {
+  display: block;
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--black);
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.text-link {
+  text-decoration: underline;
+  transition: .2s;
+  color: inherit;
+}
+
+.text-link:hover {
+  color: var(--white);
+}
+
 
 
 
