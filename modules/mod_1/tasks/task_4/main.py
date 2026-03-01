@@ -40,6 +40,13 @@ def select(connection, sql: str):
     cursor.execute(sql)
     return cursor
 
+# удаление или обновление с коммитом бд
+def delete_or_update(connection, sql: str):
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+    return cursor
+
 # Вывод результата
 def print_table(cursor):
     rows = cursor.fetchall()
@@ -51,6 +58,12 @@ sql_1 = '''
 SELECT * FROM Vulnerabilities WHERE component = 'Admin Panel' OR component = 'Reports' 
 '''
 
+sql_2 = '''
+DELETE FROM Vulnerabilities WHERE component = 'Admin Panel' OR component = 'Reports'
+'''
+
+print_table(select(connection, sql_1))
+print_table(delete_or_update(connection, sql_2))
 print_table(select(connection, sql_1))
 
 connection.close()
