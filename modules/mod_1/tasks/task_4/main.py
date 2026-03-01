@@ -62,8 +62,24 @@ sql_2 = '''
 DELETE FROM Vulnerabilities WHERE component = 'Admin Panel' OR component = 'Reports'
 '''
 
-print_table(select(connection, sql_1))
-print_table(delete_or_update(connection, sql_2))
-print_table(select(connection, sql_1))
+sql_3 = '''
+SELECT * FROM Vulnerabilities v WHERE v.vuln_type = 'SQL Injection' and datetime(v.detected_at) > datetime('2023-12-30 14:00:00')
+'''
+
+sql_4 = '''
+UPDATE Vulnerabilities as v SET area = 'db' WHERE v.vuln_type = 'SQL Injection' and datetime(v.detected_at) > datetime('2023-12-30 14:00:00')
+'''
+
+sql_5 = '''
+SELECT * FROM Vulnerabilities v WHERE area = 'frontend'
+'''
+
+sql_6 = '''
+UPDATE Vulnerabilities as v SET area = 'full' WHERE area = 'frontend'
+'''
+
+print_table(select(connection, sql_5))
+print_table(delete_or_update(connection, sql_6))
+
 
 connection.close()
