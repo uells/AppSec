@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 import json
 import os
+
 
 app = Flask(__name__)
 app.secret_key = 'change_this_to_secure_random_value'  #  — заменить 
 
 DATA_FILE = os.path.join('data', 'users.json')
-MESSAGES_FILE = os.path.join('data', 'messages')
+MESSAGES_FILE = os.path.join('data', 'messages.json')
 
 def load_json(file):
     if not os.path.exists(file):
@@ -73,23 +75,28 @@ def chat():
         return redirect(url_for('login'))
     # Загружаем собственные сообщения пользователя (пока что) из файла
     messages = load_json(MESSAGES_FILE)
-    user = session.get('username')
-    user_messages = messages.get(user)
+    user = session.get('username') 
+    user_messages = messages.get(user, [])
     return render_template('chat.html', username=user, user_messages=user_messages)
 
 @app.route('/send', methods=['POST'])
 def send():
     if 'username' not in session:
         return redirect(url_for('login'))
+    
+    # Запись собственных сообщений пользователя в файл
     message = request.form.get('message', '')
-    return message
-    # Для демонстрации: просто передаем сообщение в шаблон; позже здесь будут показываться XSS и защита
-    # В учебном стенде можно хранить сообщения в памяти или в файле
-    # Простейший вариант — временно сохранить в сессии (не для продакшна)
-    # msgs = session.get('messages', [])
-    # msgs.append({"user": session['username'], "text": message})
-    # session['messages'] = msgs
-    # return redirect(url_for('chat'))
+    all_messages = load_json(MESSAGES_FILE)
+    user = session.get('username')
+    now = datetime.now()
+    if user not in all_messages:
+        all_messages[user] = []
+    all_messages[user].append({
+        'text': message,
+        'time': now.strftime("%d-%m-%Y %H:%M")
+    })
+    save_json(all_messages, MESSAGES_FILE)
+    return redirect(url_for('chat'))
 
 if __name__ == '__main__':
     app.run(debug=True)
