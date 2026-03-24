@@ -7,16 +7,17 @@ app = Flask(__name__)
 app.secret_key = 'change_this_to_secure_random_value'  #  — заменить 
 
 DATA_FILE = os.path.join('data', 'users.json')
+MESSAGES_FILE = os.path.join('data', 'messages')
 
-def load_users():
-    if not os.path.exists(DATA_FILE):
+def load_json(file):
+    if not os.path.exists(file):
         return {}
-    with open(DATA_FILE, 'r', encoding='utf-8') as f:
+    with open(file, 'r', encoding='utf-8') as f:
         return json.load(f)
 
-def save_users(users):
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
-        json.dump(users, f, ensure_ascii=False, indent=2)
+def save_json(data, file):
+    with open(file, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 @app.route('/')
 def index():
@@ -33,14 +34,14 @@ def register():
         if not username or not password or not email:
             flash('Заполните все поля', 'error')
             return render_template('register.html')
-        users = load_users()
+        users = load_json(DATA_FILE)
         if username in users:
             flash('Пользователь уже существует', 'error')
             return render_template('register.html')
         # Хешируем пароль
         pw_hash = generate_password_hash(password)
         users[username] = {"email": email, "password": pw_hash}
-        save_users(users)
+        save_json(users, DATA_FILE)
         flash('Регистрация прошла успешно. Войдите.', 'success')
         return redirect(url_for('login'))
     return render_template('register.html')
@@ -50,7 +51,7 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
-        users = load_users()
+        users = load_json(DATA_FILE)
         user = users.get(username)
         if user and check_password_hash(user['password'], password):
             session['username'] = username
@@ -78,13 +79,14 @@ def send():
     if 'username' not in session:
         return redirect(url_for('login'))
     message = request.form.get('message', '')
+    return message
     # Для демонстрации: просто передаем сообщение в шаблон; позже здесь будут показываться XSS и защита
     # В учебном стенде можно хранить сообщения в памяти или в файле
     # Простейший вариант — временно сохранить в сессии (не для продакшна)
-    msgs = session.get('messages', [])
-    msgs.append({"user": session['username'], "text": message})
-    session['messages'] = msgs
-    return redirect(url_for('chat'))
+    # msgs = session.get('messages', [])
+    # msgs.append({"user": session['username'], "text": message})
+    # session['messages'] = msgs
+    # return redirect(url_for('chat'))
 
 if __name__ == '__main__':
     app.run(debug=True)
