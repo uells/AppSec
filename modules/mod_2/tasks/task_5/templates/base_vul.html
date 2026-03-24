@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';" /> -->
+        <title>{% block title %}AppSec Stand{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="hello-block">
+                <h1 class="hello-block_title">{% block pageTitle %}{% endblock %}</h1>
+            </div>
+            <div class="content-wrapper">
+                {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+                <ul class="flashes">
+                    {% for category, msg in messages %}
+                    <li class="{{ category }}">{{ msg }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %} {% endwith %} {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+    <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+</html>

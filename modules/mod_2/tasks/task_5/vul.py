@@ -77,7 +77,7 @@ def chat():
     messages = load_json(MESSAGES_FILE)
     user = session.get('username') 
     user_messages = messages.get(user, [])
-    return render_template('chat.html', username=user, user_messages=user_messages)
+    return render_template('chat_vul.html', username=user, user_messages=user_messages)
 
 @app.route('/send', methods=['POST'])
 def send():
